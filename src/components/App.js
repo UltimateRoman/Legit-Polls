@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Web3 from 'web3';
 import Navbar from './Navbar';
 import Home from './Home';
+import Footer from './Footer'
 import './App.css';
 
 
@@ -33,6 +34,7 @@ class App extends Component {
       <Router>   
         <Navbar />
         <Route exact path="/" component={Home} />
+        <Footer />
       </Router>
     );
   }

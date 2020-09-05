@@ -10,14 +10,14 @@ function Home() {
       <div className="container">
       <div class="row">
         <div class="column">
-          <Link to="/create">
-            <Create />
-          </Link>
+        <Link to="/create">
+          <center><Create /></center>
+        </Link>
         </div>
         <div class="column">
-          <Link to="/polls">
-            <Participate />
-          </Link>
+        <Link to="/polls">
+          <center><Participate /></center>
+        </Link>
         </div>
       </div>       
       </div>

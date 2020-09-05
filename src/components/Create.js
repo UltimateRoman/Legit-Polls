@@ -32,13 +32,10 @@ export default function FeaturedPost(props) {
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
-              <ul>
-                    <li><Link to="/cr" style={{ color: 'black' }}>Create Poll</Link></li>
-                </ul>
+                <Link to="/create" style={{ color: 'black' }}>Create Poll</Link>
               </Typography>
-              
               <Typography variant="subtitle1" paragraph>
-                Create your own secure Poll
+                Create a new secure Poll
               </Typography>
               
             </CardContent>

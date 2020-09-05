@@ -29,13 +29,10 @@ export default function FeaturedPost(props) {
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
-              <ul>
-                    <li><Link to="/poll" style={{ color: 'black' }}>Available Poll</Link></li>
-                </ul>
-              </Typography>
-              
+                <Link to="/polls" style={{ color: 'black' }}>Available Polls</Link>
+              </Typography>              
               <Typography variant="subtitle1" paragraph>
-                Click to view the available Polls right now
+                View the Polls available right now
               </Typography>
               
             </CardContent>
