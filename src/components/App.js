@@ -84,7 +84,8 @@ class App extends Component {
 
   render() {
     return (
-      <Router>   
+      <div className="container">
+        <Router>   
         <Navbar />
         <Route exact path="/" component={Home} />
         <Route exact path="/create" render={props => (
@@ -109,7 +110,9 @@ class App extends Component {
           </React.Fragment>
         )} />
         <Footer />
-      </Router>
+        </Router>
+      </div>
+      
     );
   }
 }

@@ -8,12 +8,13 @@
     animation: spin 2s linear infinite;
 }
   
-.Login-scomponent {
+.container {
     
     background-image: url(../pic.jpg);
 
     height: 100%; 
-
+    font-family:  Arial, Helvetica, sans-serif;
+    font: italic small-caps bold 12px/30px Georgia, serif;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

@@ -6,8 +6,9 @@ import './App.css'
 
 function Home() {
   return (  
+    
     <React.Fragment>   
-      <h1 align="center" style={{color: "darkviolet"}}>Legit Polls </h1> 
+      <h1 align="center" style={{color: "darkblue"}}>Legit Polls </h1> 
       <div className="container">
       <div class="row">
         <div class="column">
@@ -37,9 +38,14 @@ function Home() {
             <li>Since various consensus protocols are needed to validate the entry, it removes the risk of duplicate entry or fraud.</li>
             <li>All the transactions and data are attached to the block after the process of maximum trust verification. There is a consensus of all the ledger participants on what is to be recorded in the block.</li>
           </ol>
-          <h6 style={{color: "violet"}}>These are just some of the features of blockchain. Integrating blockchain has not only helped our poll system become more secure it has made it more reliable in every aspect</h6>
+          <h6 style={{color: "darkblue"}}>These are just some of the features of blockchain. Integrating blockchain has not only helped our poll system become more secure it has made it more reliable in every aspect</h6>
 
         </p2>
+        <p3>
+          <h6 style={{color: "brown"}}>An opinion poll, often simply referred to as a poll or a survey, is a human research survey of public opinion from a particular sample.It is the collective opinion of the people of a society or state on an issue or problem. ... For the first time, it became important what people thought as forms of political contention changed. Democracy requires public opinion because it derives authority from the public.</h6>
+          <h6 style={{color: "brown"}}>Legit polls helps in ease of data gathering.It provides hassle free automation in data handling and input.And most importantly unlinke other polls it provides us with secure and reliable results.</h6>
+          <h6 style={{color: "green"}}></h6>
+        </p3>
     </React.Fragment>
   );
 }
