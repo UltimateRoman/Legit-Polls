@@ -1,38 +1,29 @@
 import React from 'react';
-import NavBar from './components/Navbar'
-import Footer from './components/Footer'
-import Create from './components/Create'
-import Poll from './Poll'
-import Participate from './components/Participate'
-import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
+import Create from './Create'
+import Participate from './Participate'
+import {Link} from 'react-router-dom'
 import './App.css';
-import cr from './ChooseOption';
 
-function App() {
-  return (
-    <Router>
-      
+function Home() {
+  return (      
       <div className="container">
       
       <NavBar />
       <div class="row">
         <div class="column">
-          <Create />
+          <Link to="/create">
+            <Create />
+          </Link>
         </div>
         <div class="column">
-          <Participate />
-            
+          <Link to="/polls">
+            <Participate />
+          </Link>
         </div>
-        </div>
-        <Route path="/poll" exact component={Poll} />
-        <Route path="/cr" exact component={cr} />
-       
-        <Footer />
+      </div>       
       </div>
-      
-    </Router>
     
   );
 }
 
-export default App;
+export default Home;

@@ -30,9 +30,9 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            POLL
+            Legit-Polls
           </Typography>
-          <Link to="/" style={{ color: '#FFF' }}>HOME</Link>
+          <Link to="/polls" style={{ color: '#FFF' }}>Polls</Link>
         </Toolbar>
       </AppBar>
     </div>
