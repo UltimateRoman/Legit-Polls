@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 2,
+    flexGrow: 3,
   },
   
   menuButton: {
@@ -24,9 +24,9 @@ export default function ButtonAppBar() {
   const Link = require("react-router-dom").Link;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="secondary">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="green" aria-label="menu">
+          <IconButton edge="start" className={classes.menuButton} color="#FGR" aria-label="menu">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>

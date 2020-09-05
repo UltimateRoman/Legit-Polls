@@ -8,6 +8,17 @@
     animation: spin 2s linear infinite;
 }
   
+.Login-scomponent {
+    
+    background-image: url(../pic.jpg);
+
+    height: 100%; 
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -31,3 +42,4 @@
   .column {
     flex: 50%;
 }
+

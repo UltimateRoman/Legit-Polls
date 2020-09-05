@@ -35,7 +35,7 @@ export default function StickyFooter() {
       <footer className={classes.footer}>
         <Container maxWidth="sm">
           <Typography align="center" variant="body1">A smart way to decentralise polls</Typography>
-          
+          <Typography align="center" variant="body2">© 2020 Epsilon_Codinators</Typography>
         </Container>
       </footer>
     </div>
