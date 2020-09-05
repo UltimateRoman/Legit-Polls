@@ -1,64 +1,55 @@
 pragma solidity ^0.5.0;
+pragma experimental ABIEncoderV2;
 
-contract Pol {
-    uint public noOfPolls=0;
+contract Legitpolls {
+    uint public pCount=0;
     mapping(uint => Poll) public polls;
 
     struct Poll {
         uint id;
-        uint noOfOptions;
-        address author;
+        uint noofOptions;
+        address creator;
         string title;
-        string description;
-        bool active;
-        string[4] optionDescription;
-        uint[4] totalVotes;
-        }
- 
-    function createPoll(uint _noOfOptions, string memory _title, string memory _description, string memory _optionDescription1,string memory _optionDescription2) public {
-        require(_noOfOptions == 2);
-        noOfPolls ++;        
-        Poll storage p = polls[noOfPolls];
-        p.id=noOfPolls;
-        p.noOfOptions=_noOfOptions;
-        p.author=msg.sender;
-        p.title=_title;
-        p.description=_description;
-        p.active=true;
-        p.optionDescription[0]=_optionDescription1;
-        p.optionDescription[1]=_optionDescription2;
-        p.totalVotes=[0,0];
-    }
-    function createPoll(uint _noOfOptions, string memory _title, string memory _description, string memory _optionDescription1,string memory _optionDescription2,string memory _optionDescription3) public {
-        require(_noOfOptions == 3);
-        noOfPolls ++;        
-        Poll storage p = polls[noOfPolls];
-        p.id=noOfPolls;
-        p.noOfOptions=_noOfOptions;
-        p.author=msg.sender;
-        p.title=_title;
-        p.description=_description;
-        p.active=true; 
-        p.optionDescription[0]=_optionDescription1;
-        p.optionDescription[1]=_optionDescription2;
-        p.optionDescription[2]=_optionDescription3;
-        p.totalVotes=[0,0,0];
-    }
-    function createPoll(uint _noOfOptions, string memory _title, string memory _description, string memory _optionDescription1,string memory _optionDescription2,string memory _optionDescription3,string memory _optionDescription4) public {
-        require(_noOfOptions == 4);
-        noOfPolls ++;        
-        Poll storage p = polls[noOfPolls];
-        p.id=noOfPolls;
-        p.noOfOptions=_noOfOptions;
-        p.author=msg.sender;
-        p.title=_title;
-        p.description=_description;
-        p.active=true;
-        p.optionDescription[0]=_optionDescription1;
-        p.optionDescription[1]=_optionDescription2;
-        p.optionDescription[2]=_optionDescription3;
-        p.optionDescription[3]=_optionDescription4;
-        p.totalVotes=[0,0,0,0];
+        string[4] options;
+        uint[4] votes;
+        string detailsfile;
     }
 
+    event pollCreated(
+        uint id,
+        uint noofOptions,
+        address creator,
+        string title
+    );
+
+    event pollVoted(
+        uint id
+    );
+ 
+    function createPoll(uint _noofOptions, string memory _title, string[] memory _options, string memory _detailsfile) public {
+        require(_noofOptions>=1 && _noofOptions <= 4);
+        require(bytes(_title).length > 0);
+        pCount++;        
+        Poll memory _p = polls[pCount];
+        _p.id=pCount;
+        _p.noofOptions=_noofOptions;
+        _p.creator=msg.sender;
+        _p.title=_title;
+        for(uint i=0; i<_noofOptions; ++i) {
+            _p.options[i]=_options[i];
+            _p.votes[i]=0;
+        }
+        _p.detailsfile=_detailsfile;
+        polls[pCount] = _p;
+        emit pollCreated(pCount, _noofOptions, msg.sender, _title);
+    }
+
+    function votePoll(uint _id, uint _option) public {
+        require(_id > 0 && _id <= pCount);
+        Poll memory _p = polls[pCount];
+        require(_option >= 1 && _option <=_p.noofOptions);
+        _p.votes[_option-1]++;
+        polls[pCount] = _p;
+        emit pollVoted(_id);
+    }
 }
