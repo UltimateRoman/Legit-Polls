@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Web3 from 'web3';
+import Legitpolls from '../abis/Legitpolls.json';
 import Navbar from './Navbar';
 import Home from './Home';
-import Footer from './Footer'
+import Footer from './Footer';
+import Createpoll from './Createpoll';
+import Viewpolls from './Viewpolls';
 import './App.css';
 
 class App extends Component {
@@ -26,32 +29,85 @@ class App extends Component {
     }
   }
 
-  
+  async loadBlockchainData() {
+    const web3 = window.web3
+    const accounts = await web3.eth.getAccounts()
+    this.setState({ account: accounts[0] })
+    const networkId = await web3.eth.net.getId()
+    const networkData = Legitpolls.networks[networkId]
+    if(networkData) {
+      const lps = web3.eth.Contract(Legitpolls.abi, networkData.address)
+      this.setState({ lps })
+      const pCount = await lps.methods.pCount().call()
+      this.setState({ pCount })
+      for (var i = 1; i <= pCount; i++) {
+        const poll = await lps.methods.polls(i).call()
+        this.setState({
+          polls: [...this.state.polls, poll]
+        })
+      }
+    this.setState({ loading: false})
+    } else {
+      window.alert('The forum contract could not be deployed to network')
+    }
+  }
+
+  createPoll(title, option1, option2, detailsfile) {
+    this.setState({ loading: true })
+    this.state.lps.methods.createPoll(title, option1, option2, detailsfile).send({ from: this.state.account }).once('confirmation', (n, receipt) => {
+      this.setState({ loading: false })
+      window.location.pathname = '/polls'  
+    })
+  }
+
+  votePoll(id, option) {
+    this.setState({ loading: true })
+    this.state.lps.methods.votePoll(id, option).send({ from: this.state.account })
+    .once('confirmation', (n, receipt) => {
+      this.setState({ loading: false })
+      window.location.reload()
+    })
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      account: '',
+      lps: null,
+      pCount: 0,
+      polls: [],
+      loading: true
+    }
+    this.createPoll = this.createPoll.bind(this)
+    this.votePoll = this.votePoll.bind(this)
+  }
 
   render() {
     return (
       <Router>   
         <Navbar />
         <Route exact path="/" component={Home} />
-        <h1 align="center" style={{color: "darkviolet"}}>Legit Polls </h1>
-        <p1>
-          <h6 style={{color: "blue"}}>During the lockdown when colleges and schools were unable to conduct offline exams as usual but they never gave out a formal notice saying that offline exams cannot be conducted and we were always on the edge on whether to study or not.</h6>
-          <h6 style={{color: "blue"}}>I remember filling out plenty of polls on the topic that exams should be cancelled or not. On one regular online class i asked my teacher the polls all came to the conclusion that semester exams should be cancelled but the teacher gave me a straight reply that such polls cannot be trusted and are always maanipulated.</h6>
-          <h6 style={{color: "blue"}}>This is one of the reasons why my team has come up with Legit Polls a ethereum based blockchain dapp.</h6>
-        </p1>
-        <p2>
-          <h6 style={{color: "purple"}}>Using Ethereum blockchain gave our poll system a huge advantage</h6>
-          <ol>
-            <li>The blockchain technology allows for verification without having to be dependent on third-parties.</li>
-            <li>The data structure in a blockchain is append-only. So, the data cannot be altered or deleted.</li>
-            <li>The transactions stored in the blocks are contained in millions of computers participating in the chain. Hence it is decentralized. There is no possibility that the data if lost cannot be recovered.</li>
-            <li>The transactions that take place are transparent. The individuals who are provided authority can view the transaction.</li>
-            <li>Since various consensus protocols are needed to validate the entry, it removes the risk of duplicate entry or fraud.</li>
-            <li>All the transactions and data are attached to the block after the process of maximum trust verification. There is a consensus of all the ledger participants on what is to be recorded in the block.</li>
-          </ol>
-          <h6 style={{color: "violet"}}>These are just some of the features of blockchain. Integrating blockchain has not only helped our poll system become more secure it has made it more reliable in every aspect</h6>
-
-        </p2>
+        <Route exact path="/create" render={props => (
+          <React.Fragment>
+            { this.state.loading
+            ? <center><br/><br/><br/><br/><br/><br/><div class="loader"></div></center>
+            : <Createpoll
+              createPoll={this.createPoll}
+            />
+            }
+          </React.Fragment>
+        )} />
+        <Route exact path="/polls" render={props => (
+          <React.Fragment>
+            { this.state.loading
+            ? <center><br/><br/><br/><br/><br/><br/><div class="loader"></div></center>
+            : <Viewpolls
+              polls={this.state.polls}
+              votePoll={this.votePoll}
+            />
+            }
+          </React.Fragment>
+        )} />
         <Footer />
       </Router>
     );
