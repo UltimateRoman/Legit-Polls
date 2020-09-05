@@ -3,7 +3,7 @@ import Create from './Create'
 import Participate from './Participate'
 import {Link} from 'react-router-dom'
 import './App.css'
-
+import Img from '../picc.jpg'
 function Home() {
   return (  
     
@@ -46,6 +46,11 @@ function Home() {
           <h6 style={{color: "brown"}}>Legit polls helps in ease of data gathering.It provides hassle free automation in data handling and input.And most importantly unlinke other polls it provides us with secure and reliable results.</h6>
           <h6 style={{color: "green"}}></h6>
         </p3>
+        <div> 
+				<center>
+					<img src= {Img} alt="pic" />
+				</center>
+			</div>
     </React.Fragment>
   );
 }
