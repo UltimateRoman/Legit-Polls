@@ -4,15 +4,23 @@ const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001,protocol: 'https' })
 
 class Createpoll extends Component {
-
+  _isMounted = false;
     constructor(props) {
         super(props);
         this.state = {
           buffer: null,
-          fhash: ''
+          fhash: 'yh'
         };
     }
     
+    componentDidMount() {
+      this._isMounted = true;
+    }
+
+    componentWillUnmount() {
+      this._isMounted = false;
+    }
+
     captureFile = (event) => {
         event.preventDefault()
         const file = event.target.files[0]
@@ -30,13 +38,17 @@ class Createpoll extends Component {
               <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px' }}>
                 <div className="content mr-auto ml-auto">
                   <p>&nbsp;</p>
-                    <form onSubmit={(event) => {
+                    <form onSubmit={async(event) => {
                       event.preventDefault()
                       console.log("Submitting file to ipfs...")
-                      ipfs.add(this.state.buffer, (error, result) => {
-                        console.log('IPFS result', result)
-                        const fhash = result[0].hash
-                        this.setState({ fhash })
+                      await ipfs.add(this.state.buffer, (error, result) => {
+                        console.log("IPFS: ",result)
+                        if (this._isMounted) {
+                          this.setState({
+                            fhash: result[0].hash,
+                          })
+                        }
+                        console.log(this.state.fhash)
                         if(error) {
                           console.error(error)
                           return
@@ -74,7 +86,7 @@ class Createpoll extends Component {
                         className="form-control"
                         placeholder="Enter Option 2" />
                         <br/>
-                    <span>Choose suitable file</span><input type='file' onChange={this.captureFile}/>
+                    <span>Upload a relevant document</span><input type='file' onChange={this.captureFile}/>
                     </div>
                     <br/>
                     <button type="submit" className="btn btn-outline-info">Create Poll</button>

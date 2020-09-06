@@ -4,14 +4,22 @@ class Viewpolls extends Component {
     constructor() {
         super();
         this.state = {
-          search: ''
+          search: '',
+          selectedOption: 1
         };
+        this.onValueChange = this.onValueChange.bind(this);
       }
     
       updateSearch(event) {
         this.setState({search: event.target.value.substr(0,20)});
       }
-    
+
+      onValueChange(event) {
+        this.setState({
+          selectedOption: event.target.value
+        });
+      }
+
       render() {
         let filteredPolls = this.props.polls.filter(
           (poll) => {
@@ -31,24 +39,54 @@ class Viewpolls extends Component {
                     return(
                       <div class="coupon" key={key} >
                         <div className="card-header">
+                          {console.log(poll)}
                         <h3>{poll.title}</h3>
                         <br/>
-                        <p>{poll.option1}: {poll.vote1}</p>
-                        <p>{poll.option2}: {poll.vote2}</p>
+                        <a href={`https://ipfs.infura.io/ipfs/${poll.detailsfile}`} target="_blank">File</a>
                         <br/>
                         <small>Creator: {poll.creator}</small>
                         </div>
-                        <ul id="postList" className="list-group list-group-flush">
-                          <li key={key} className="list-group-item py-2">   
-                            <button
+                        <form>
+                        <div className="radio">
+                          <label>
+                            <input
+                              type="radio"
+                              value="1"
+                              checked={this.state.selectedOption === "1"}
+                              onChange={this.onValueChange}
+                            />
+                            {poll.option1} : {poll.votes1.toString()} votes
+                          </label>
+                        </div>
+                        <div className="radio">
+                          <label>
+                            <input
+                              type="radio"
+                              value="2"
+                              checked={this.state.selectedOption === "2"}
+                              onChange={this.onValueChange}
+                            />
+                            {poll.option2} : {poll.votes2.toString()} votes
+                          </label>
+                        </div>
+                        <div>
+                          Selected option is : {this.state.selectedOption}
+                        </div>
+                        <center>
+                        <button
                               type="submit"
                               className="btn btn-info"
-                              name={poll.id}
-                              onSubmit={(event) => {
-                                this.props.votePoll(event.target.name, 1)
+                              name={poll.id}                                
+                              onClick={(event) => {
+                                this.props.votePoll(event.target.name, this.state.selectedOption)
                               }}>
                               Vote
-                            </button>
+                        </button>
+                        </center>
+                      </form>
+                        <ul id="postList" className="list-group list-group-flush">
+                          <li key={key} className="list-group-item py-2">   
+                            
                           </li>
                         
                         </ul>

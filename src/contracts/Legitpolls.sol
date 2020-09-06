@@ -41,7 +41,7 @@ contract Legitpolls {
         require(_id > 0 && _id <= pCount);
         Poll memory _p = polls[_id];
         require(_option == 1 || _option == 2);
-        if(_option==2){
+        if(_option==1){
             _p.votes1++;
         }
         if(_option==2){

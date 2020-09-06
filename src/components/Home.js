@@ -44,7 +44,7 @@ function Home() {
         <p3>
           <h6 style={{color: "brown"}}>An opinion poll, often simply referred to as a poll or a survey, is a human research survey of public opinion from a particular sample.It is the collective opinion of the people of a society or state on an issue or problem. ... For the first time, it became important what people thought as forms of political contention changed. Democracy requires public opinion because it derives authority from the public.</h6>
           <h6 style={{color: "brown"}}>Legit polls helps in ease of data gathering.It provides hassle free automation in data handling and input.And most importantly unlinke other polls it provides us with secure and reliable results.</h6>
-          <h6 style={{color: "green"}}></h6>
+          
         </p3>
         <div> 
 				<center>
