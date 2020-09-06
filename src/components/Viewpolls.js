@@ -40,7 +40,6 @@ class Viewpolls extends Component {
                     return(
                       <div class="coupon" key={key} >
                         <div className="card-header">
-                          {console.log(poll)}
                         <h3>{poll.title}</h3>
                         <br/>
                         <a href={`https://ipfs.infura.io/ipfs/${poll.detailsfile}`} target="_blank" rel="noopener noreferrer"><p class="badge badge-primary">Details</p></a>
