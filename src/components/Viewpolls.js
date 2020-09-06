@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ProgressBar } from 'react-bootstrap';
+import './App.css';
 
 class Viewpolls extends Component {
     constructor() {
@@ -29,7 +30,7 @@ class Viewpolls extends Component {
         );
   
       return (
-          <div className="container-fluid mt-5">
+          <div className="contain">
           <div className="row">
               <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px' }}>
                 <div className="content mr-auto ml-auto">
