@@ -57,6 +57,9 @@ class Viewpolls extends Component {
                             />
                             {poll.option1} : {poll.votes1.toString()} votes
                           </label>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
                         </div>
                         <div className="radio">
                           <label>
@@ -68,6 +71,9 @@ class Viewpolls extends Component {
                             />
                             {poll.option2} : {poll.votes2.toString()} votes
                           </label>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
                         </div>
                         <div>
                           Selected option is : {this.state.selectedOption}
