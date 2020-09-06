@@ -7,15 +7,20 @@ Node JS - [node](https://nodejs.org/en/download/)
 
 An Ethereum wallet like [Metamask](https://metamask.io/) in your browser and set a custom RPC to https://rpc-mumbai.matic.today .
 
-### Install Truffle
-```
-$ npm install -g truffle
-```
-### Run the dApp
+### Clone the repo
 ```
 $ git clone https://github.com/UltimateRoman/Legit-Polls.git
 $ cd Legit-Polls
+```
+
+### Install Truffle and other dependencies
+```
+$ npm install -g truffle
 $ npm install
+```
+
+### Run the dApp
+```
 $ truffle migrate --network matic
 $ npm run start
 ```
