@@ -1,27 +1,22 @@
 # Legit-Polls
-An Ethereum based decentralised platform for legitimate polls.
-
-A blockchain implimentation of a polling system that makes sure every vote counts.
+A decentralized platform to conduct public opinion polls legitimately by leveraging the power of blockchain while enhancing awareness on crucial public matters and ensuring diversity of opinion.
 
 ### Dependencies
 
-[node](https://nodejs.org/en/download/)
+Node JS - [node](https://nodejs.org/en/download/)
 
-A wallet like [Metamask](https://metamask.io/) in your browser.
+An Ethereum wallet like [Metamask](https://metamask.io/) in your browser and set a custom RPC to https://rpc-mumbai.matic.today .
 
-For your wallet set a custom RPC to localhost:7545 and import accounts from ganache-cli by copying private keys.
-### Install truffle and ganache-cli
+### Install Truffle
 ```
 $ npm install -g truffle
-$ npm install -g ganache-cli
 ```
-### Installation of Legit-Polls
+### Run the dApp
 ```
 $ git clone https://github.com/UltimateRoman/Legit-Polls.git
 $ cd Legit-Polls
 $ npm install
-$ ganache-cli -p 7545
-$ truffle migrate --reset
+$ truffle migrate --network matic
 $ npm run start
 ```
 
