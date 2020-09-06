@@ -10,6 +10,8 @@ import CardContent from '@material-ui/core/CardContent';
 const useStyles = makeStyles({
   card: {
     display: 'flex',
+    backgroundColor: 'lightblue',
+
   },
   cardDetails: {
     flex: 1,
