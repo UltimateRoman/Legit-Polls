@@ -9,6 +9,7 @@ function Home() {
     
     <React.Fragment>   
       <h1 align="center" style={{color: "darkblue"}}>Legit Polls </h1> 
+      <h3 align="center" style={{color: "mediumslateblue"}}>By Epsilon_Codinators </h3>
       <div className="container">
       <div class="row">
         <div class="column">

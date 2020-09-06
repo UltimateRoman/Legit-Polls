@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { ProgressBar } from 'react-bootstrap';
 
 class Viewpolls extends Component {
     constructor() {
         super();
         this.state = {
           search: '',
-          selectedOption: 1
+          selectedOption:'',
         };
         this.onValueChange = this.onValueChange.bind(this);
       }
@@ -32,7 +33,7 @@ class Viewpolls extends Component {
           <div className="row">
               <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px' }}>
                 <div className="content mr-auto ml-auto">
-                  <h1>Search and Vote in Polls</h1>
+                  <h1 style={{color: "mediumvioletred"}}>Search and Vote in Polls</h1>
                   <input type="text" class="form-control" value={this.state.search} onChange={this.updateSearch.bind(this)} />
                   <p>&nbsp;</p>
                   { filteredPolls.map((poll, key) => {
@@ -42,7 +43,7 @@ class Viewpolls extends Component {
                           {console.log(poll)}
                         <h3>{poll.title}</h3>
                         <br/>
-                        <a href={`https://ipfs.infura.io/ipfs/${poll.detailsfile}`} target="_blank">File</a>
+                        <a href={`https://ipfs.infura.io/ipfs/${poll.detailsfile}`} target="_blank" rel="noopener noreferrer"><p class="badge badge-primary">Details</p></a>
                         <br/>
                         <small>Creator: {poll.creator}</small>
                         </div>
@@ -57,9 +58,7 @@ class Viewpolls extends Component {
                             />
                             {poll.option1} : {poll.votes1.toString()} votes
                           </label>
-                          <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          <ProgressBar now={parseInt(poll.votes1.toString())*100/(parseInt(poll.votes1.toString())+parseInt(poll.votes2.toString()))} label={`${parseInt(poll.votes1.toString())*100/(parseInt(poll.votes1.toString())+parseInt(poll.votes2.toString()))}%`} />
                         </div>
                         <div className="radio">
                           <label>
@@ -70,10 +69,8 @@ class Viewpolls extends Component {
                               onChange={this.onValueChange}
                             />
                             {poll.option2} : {poll.votes2.toString()} votes
-                          </label>
-                          <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          </label>                          
+                          <ProgressBar now={parseInt(poll.votes2.toString())*100/(parseInt(poll.votes1.toString())+parseInt(poll.votes2.toString()))} label={`${parseInt(poll.votes2.toString())*100/(parseInt(poll.votes1.toString())+parseInt(poll.votes2.toString()))}%`} />
                         </div>
                         <div>
                           Selected option is : {this.state.selectedOption}

@@ -31,7 +31,9 @@ export default function ButtonAppBar() {
           </IconButton>
           
           <Typography variant="h6" className={classes.title}>
-          Legit-Polls
+          <Link to="/" >
+            <div style={{color:"white"}}>Legit-Polls</div>          
+          </Link>
           </Typography>
           <Link to="/create" style={{ color: '#FFF' }}>Create</Link>
           &nbsp; &nbsp;

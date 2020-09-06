@@ -61,7 +61,7 @@ class Createpoll extends Component {
                       this.props.createPoll(title, option1, option2, detailsfile)
                     }}>
                     <center>
-                    <h1>Create your Poll</h1>
+                    <h1 style={{color: "royalblue"}}>Create your Poll</h1>
                     <div class="form-container">
                       <input
                         id="ptitle"
@@ -84,9 +84,10 @@ class Createpoll extends Component {
                         type="text"
                         ref={(input) => { this.poption2 = input }}
                         className="form-control"
-                        placeholder="Enter Option 2" />
+                        placeholder="Enter Option 2" 
+                        required />
                         <br/>
-                    <span>Upload a relevant document</span><input type='file' onChange={this.captureFile}/>
+                    <span>Upload a relevant document</span><input type='file' onChange={this.captureFile} required/>
                     </div>
                     <br/>
                     <button type="submit" className="btn btn-outline-info">Create Poll</button>
